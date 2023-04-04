@@ -17,9 +17,10 @@ public class OfferService {
 
     List<Offer> fetchAllOffersAndSaveAllIfNotExists() {
         List<Offer> jobOffers = fetchOffers();
-        final List<Offer> offers = filterNotExistingOffers(jobOffers);
+       // final List<Offer> offers = filterNotExistingOffers(jobOffers);
         try {
-            return OfferRepository.saveAll(offers);
+            return jobOffers;
+           // return OfferRepository.saveAll(offers);
         } catch (DuplicateException duplicateKeyException) {
             throw new SavingException(duplicateKeyException.getMessage(), jobOffers);
         }

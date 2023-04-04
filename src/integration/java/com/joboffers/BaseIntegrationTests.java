@@ -1,3 +1,5 @@
+package com.joboffers;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.junit5.WireMockExtension;
 import com.joboffers.OffersSpringBootApplication;

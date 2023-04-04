@@ -12,15 +12,15 @@ import static com.joboffers.domain.offer.OfferMapper.mapper;
 @AllArgsConstructor
 public class OfferService {
 
-    private  final  OfferFetchable flatOfferFetchable;
+    private final OfferFetchable flatOfferFetchable;
     private final OfferRepository OfferRepository;
 
     List<Offer> fetchAllOffersAndSaveAllIfNotExists() {
         List<Offer> jobOffers = fetchOffers();
-       // final List<Offer> offers = filterNotExistingOffers(jobOffers);
+        final List<Offer> offers = filterNotExistingOffers(jobOffers);
         try {
-            return jobOffers;
-           // return OfferRepository.saveAll(offers);
+
+            return OfferRepository.saveAll(offers);
         } catch (DuplicateException duplicateKeyException) {
             throw new SavingException(duplicateKeyException.getMessage(), jobOffers);
         }

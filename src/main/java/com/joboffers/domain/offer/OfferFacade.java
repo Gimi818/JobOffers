@@ -13,6 +13,7 @@ import static com.joboffers.domain.offer.OfferMapper.mapper;
 @AllArgsConstructor
 
 public class OfferFacade {
+
     private final OfferRepository offerRepository;
     private final OfferService offerService;
 

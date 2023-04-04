@@ -3,11 +3,19 @@ package com.joboffers.features;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.joboffers.BaseIntegrationTests;
 import com.joboffers.SampleJobOffersResponse;
-import com.joboffers.infrastructure.scheduler.HttpScheduler;
-import com.joboffers.scheduler.SchedulerTest;
+import com.joboffers.domain.offer.dto.OfferResponseDto;
+import com.joboffers.infrastructure.offer.scheduler.HttpScheduler;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.ResultActions;
+
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 public class TypicalScenarioIntegrationTests extends BaseIntegrationTests implements SampleJobOffersResponse {
@@ -15,13 +23,19 @@ public class TypicalScenarioIntegrationTests extends BaseIntegrationTests implem
     HttpScheduler httpScheduler;
 
     @Test
-    public void user_want_to_see_offers_but_have_to_be_logged_in_and_external_server_should_have_some_offers() {
+    public void user_want_to_see_offers_but_have_to_be_logged_in_and_external_server_should_have_some_offers() throws Exception {
         //step 1: there are no offers in external HTTP server
         wireMockServer.stubFor(WireMock.get("/offers")
                 .willReturn(WireMock.aResponse()
                         .withStatus(HttpStatus.OK.value())
                         .withHeader("Content-Type", "application/json")
                         .withBody(bodyWithFourOffersJson())));
-        httpScheduler.fetchAllOffersAndSaveAllIfNotExists();
+
+        // given && when
+        List<OfferResponseDto> newOffers = httpScheduler.fetchAllOffersAndSaveAllIfNotExists();
+        // then
+        assertThat(newOffers).hasSize(4);
+
+
     }
 }

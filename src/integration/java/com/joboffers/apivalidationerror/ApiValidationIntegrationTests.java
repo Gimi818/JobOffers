@@ -2,6 +2,7 @@ package com.joboffers.apivalidationerror;
 
 import com.joboffers.BaseIntegrationTests;
 import com.joboffers.infrastructure.apivalidation.ApiValidationErrorDto;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
@@ -13,7 +14,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class ApiValidationIntegrationTests  extends BaseIntegrationTests {
     @Test
-    public void should_return_400_bad_request_and_validation_message_when_empty_and_null_in_offer_save_request() throws Exception {
+    @DisplayName("should return 400 bad request and validation message when empty and null in offer save request")
+    public void should_return_400() throws Exception {
         // given & when
         ResultActions perform = mockMvc.perform(post("/offers")
                 .content("""

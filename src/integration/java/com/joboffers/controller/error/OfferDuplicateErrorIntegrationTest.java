@@ -1,6 +1,7 @@
 package com.joboffers.controller.error;
 
 import com.joboffers.BaseIntegrationTests;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 
@@ -13,7 +14,8 @@ public class OfferDuplicateErrorIntegrationTest extends BaseIntegrationTests {
 
 
     @Test
-    public void should_return_409_conflict_when_added_second_offer_with_same_offer_url() throws Exception {
+    @DisplayName("should return 409 conflict when added second offer with same offer url")
+    public void should_return_409() throws Exception {
         // step 1
         // given && when
         ResultActions perform = mockMvc.perform(post("/offers")

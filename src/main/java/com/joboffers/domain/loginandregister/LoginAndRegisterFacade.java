@@ -6,7 +6,9 @@ import com.joboffers.domain.loginandregister.dto.UserDto;
 import com.joboffers.domain.loginandregister.exception.UsernameNotFoundException;
 import lombok.AllArgsConstructor;
 
-import static com.joboffers.domain.loginandregister.exception.UserMapper.mapper;
+import static com.joboffers.domain.loginandregister.UserMapper.mapper;
+
+
 @AllArgsConstructor
 public class LoginAndRegisterFacade {
     private static final String USER_NOT_FOUND = "User not found";

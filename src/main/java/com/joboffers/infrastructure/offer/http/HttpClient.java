@@ -1,4 +1,4 @@
-package com.joboffers.infrastructure.http;
+package com.joboffers.infrastructure.offer.http;
 
 import com.joboffers.domain.offer.OfferFetchable;
 import com.joboffers.domain.offer.dto.JobOfferResponse;

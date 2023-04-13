@@ -1,6 +1,5 @@
-package com.joboffers.domain.loginandregister.exception;
+package com.joboffers.domain.loginandregister;
 
-import com.joboffers.domain.loginandregister.User;
 import com.joboffers.domain.loginandregister.dto.RegisterUserDto;
 import com.joboffers.domain.loginandregister.dto.UserDto;
 import org.mapstruct.Mapper;

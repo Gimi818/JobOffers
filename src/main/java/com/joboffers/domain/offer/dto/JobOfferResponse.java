@@ -4,8 +4,8 @@ import lombok.Builder;
 
 @Builder
 public record JobOfferResponse(
-        String companyName,
-        String position,
+        String title,
+        String company,
         String salary,
         String offerUrl
 ) {

@@ -16,7 +16,9 @@ public interface OfferMapper {
     OfferResponseDto mapFromOfferToDto(Offer offers);
 
     Offer mapFromOfferDtoToOffer(OfferRequestDto offerRequestDto);
-    @Mapping(target = "position", source ="title")
+
+
+    @Mapping(target = "position", source = "title")
     @Mapping(target = "companyName", source = "company")
     Offer mapFromOfferResponseToOffer(JobOfferResponse offerResponse);
 

@@ -1,6 +1,7 @@
 spring:
   data:
     mongodb:
+      auto-index-creation: true
       uri: mongodb://admin:admin@localhost:27017/offers
 
   mvc:
@@ -20,7 +21,7 @@ http:
   offers:
     scheduler:
       request:
-        delay: PT10S
+        delay: PT3H
 
 scheduling:
   enabled: true

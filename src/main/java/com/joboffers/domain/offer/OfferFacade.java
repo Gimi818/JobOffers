@@ -2,7 +2,7 @@ package com.joboffers.domain.offer;
 
 import com.joboffers.domain.offer.dto.OfferRequestDto;
 import com.joboffers.domain.offer.dto.OfferResponseDto;
-import com.joboffers.domain.offer.exception.NotFoundException;
+import com.joboffers.domain.offer.exception.OfferNotFoundException;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
@@ -34,7 +34,7 @@ public class OfferFacade {
     public OfferResponseDto findOfferById(String id) {
         return offerRepository.findById(id)
                 .map(mapper::mapFromOfferToDto)
-                .orElseThrow(() -> new NotFoundException(id));
+                .orElseThrow(() -> new OfferNotFoundException(id));
     }
 
     public OfferResponseDto saveOffer(OfferRequestDto offerDto) {

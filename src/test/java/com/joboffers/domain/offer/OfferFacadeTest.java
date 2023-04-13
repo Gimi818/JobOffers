@@ -3,16 +3,15 @@ package com.joboffers.domain.offer;
 import com.joboffers.domain.offer.dto.JobOfferResponse;
 import com.joboffers.domain.offer.dto.OfferRequestDto;
 import com.joboffers.domain.offer.dto.OfferResponseDto;
-import com.joboffers.domain.offer.exception.DuplicateException;
-import com.joboffers.domain.offer.exception.NotFoundException;
+import com.joboffers.domain.offer.exception.OfferNotFoundException;
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
+import org.springframework.dao.DuplicateKeyException;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.ThrowableAssert.catchThrowable;
-import static org.junit.jupiter.api.Assertions.*;
 
 class OfferFacadeTest {
     @Test
@@ -103,7 +102,7 @@ class OfferFacadeTest {
 
         // then
         AssertionsForClassTypes.assertThat(thrown)
-                .isInstanceOf(NotFoundException.class)
+                .isInstanceOf(OfferNotFoundException.class)
                 .hasMessage("Offer with id 100 not found");
     }
 
@@ -111,17 +110,17 @@ class OfferFacadeTest {
     public void should_throw_duplicate_key_exception_when_with_offer_url_exists() {
         // given
         OfferFacade offerFacade = new OfferFacadeTestConfiguration(List.of()).offerFacadeForTests();
-        OfferResponseDto offerResponseDto = offerFacade.saveOffer(new OfferRequestDto("Google", "Mid", "7000 - 13000", "Nofluffjobs.pl/555"));
+        OfferResponseDto offerResponseDto = offerFacade.saveOffer(new OfferRequestDto("BWE", "mid", "7000", "hello.pl"));
         String savedId = offerResponseDto.id();
         assertThat(offerFacade.findOfferById(savedId).id()).isEqualTo(savedId);
         // when
         Throwable thrown = catchThrowable(() -> offerFacade.saveOffer(
-                new OfferRequestDto("Amazon", "Junior", "5000 - 6000", "Nofluffjobs.pl/555")));
+                new OfferRequestDto("BWE", "mid", "7000", "hello.pl")));
 
         // then
         AssertionsForClassTypes.assertThat(thrown)
-                .isInstanceOf(DuplicateException.class)
-                .hasMessage("Offer with offerUrl [Nofluffjobs.pl/555] already exists");
+                .isInstanceOf(DuplicateKeyException.class)
+                .hasMessage("Offer with offerUrl [hello.pl] already exists");
     }
 
 }

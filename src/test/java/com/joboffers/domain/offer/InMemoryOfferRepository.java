@@ -1,6 +1,6 @@
 package com.joboffers.domain.offer;
 
-import com.joboffers.domain.offer.exception.DuplicateException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -48,10 +48,11 @@ public class InMemoryOfferRepository implements OfferRepository{
         return false;
     }
 
+
     @Override
-    public Offer save(Offer entity) {
+    public <S extends Offer> S save(S entity) {
         if (database.values().stream().anyMatch(offer -> offer.offerUrl().equals(entity.offerUrl()))) {
-            throw new DuplicateException(entity.offerUrl());
+            throw new DuplicateKeyException(String.format("Offer with offerUrl [%s] already exists", entity.offerUrl()));
         }
         UUID id = UUID.randomUUID();
         Offer offer = new Offer(
@@ -62,7 +63,7 @@ public class InMemoryOfferRepository implements OfferRepository{
                 entity.offerUrl()
         );
         database.put(id.toString(), offer);
-        return offer;
+        return (S) offer;
     }
 
 

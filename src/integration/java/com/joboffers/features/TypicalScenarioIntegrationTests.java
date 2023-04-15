@@ -4,7 +4,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.joboffers.BaseIntegrationTests;
 import com.joboffers.SampleJobOffersResponse;
+import com.joboffers.domain.loginandregister.dto.RegistrationResultDto;
 import com.joboffers.domain.offer.dto.OfferResponseDto;
+import com.joboffers.infrastructure.loginandregister.controller.dto.JwtResponseDto;
 import com.joboffers.infrastructure.offer.scheduler.HttpScheduler;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,6 +28,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.utility.DockerImageName;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -46,6 +49,7 @@ public class TypicalScenarioIntegrationTests extends BaseIntegrationTests implem
         registry.add("offer.http.client.config.uri", () -> WIRE_MOCK_HOST);
         registry.add("offer.http.client.config.port", () -> wireMockServer.getPort());
     }
+
     @Test
     @DisplayName("user want to see offers but have to be logged in and external server should have some offers")
     public void typical_scenario() throws Exception {
@@ -59,7 +63,7 @@ public class TypicalScenarioIntegrationTests extends BaseIntegrationTests implem
                         .withBody(bodyWithZeroOffersJson())));
 
 
-        // step 2: scheduler start first time and made GET to external server and system added 0 offers to database
+        // step 2: scheduler start first time and made  GET to external server and system added 0 offers to database
         // given && when
         List<OfferResponseDto> newOffers = httpScheduler.fetchAllOffersAndSaveAllIfNotExists();
         // then
@@ -67,9 +71,75 @@ public class TypicalScenarioIntegrationTests extends BaseIntegrationTests implem
 
 
         //step 3: user tried to get JWT token by requesting POST /token with username=someUser, password=somePassword and system returned UNAUTHORIZED(401)
+        //given && when
+        ResultActions failedLoginRequest = mockMvc.perform(post("/token")
+                .content("""
+                        {
+                        "username": "User",
+                        "password": "Password"
+                        }
+                        """.trim())
+                .contentType(MediaType.APPLICATION_JSON_VALUE));
+        //then
+        failedLoginRequest
+                .andExpect(status().isUnauthorized())
+                .andExpect(content().json(
+                        """
+                                {
+                                "message": "Bad Credentials",
+                                "status": "UNAUTHORIZED"
+                                }
+                                        """.trim()));
+
+
         //step 4: user made GET /offers with no jwt token and system returned UNAUTHORIZED(401)
-        //step 5: user made POST /register with username=someUser, password=somePassword and system registered user with status OK(200)
+
+        ResultActions failedGetOffersRequest = mockMvc.perform(get("/offers")
+                .contentType(MediaType.APPLICATION_JSON_VALUE));
+        //then
+        failedGetOffersRequest.andExpect(status().isForbidden());
+
+        //step 5: user made POST /register with username=User, password=Password and system registered user with status CREATED(200)
+
+        ResultActions failedRegisterAction = mockMvc.perform(post("/register")
+                .content(
+                        """
+                                {"username": "User",
+                                "password": "Password"
+                                }
+                                """
+                )
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+        );
+        MvcResult registerActionResult = failedRegisterAction.andExpect(status().isCreated()).andReturn();
+        String registerActionResultJson = registerActionResult.getResponse().getContentAsString();
+        RegistrationResultDto registrationResultDto = objectMapper.readValue(registerActionResultJson, RegistrationResultDto.class);
+        assertAll(
+                () -> assertThat(registrationResultDto.username()).isEqualTo("User"),
+                () -> assertThat(registrationResultDto.created()).isTrue(),
+                () -> assertThat(registrationResultDto.id()).isNotNull()
+        );
+
         //step 6: user tried to get JWT token by requesting POST /token with username=someUser, password=somePassword and system returned OK(200) and jwttoken=AAAA.BBBB.CCC
+        ResultActions successLoginRequest = mockMvc.perform(post("/token")
+                .content(
+                        """
+                                {"username": "User",
+                                "password": "Password"
+                                }
+                                """
+                )
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+        );
+        MvcResult mvcResult = successLoginRequest.andExpect(status().isOk()).andReturn();
+        String json = mvcResult.getResponse().getContentAsString();
+        JwtResponseDto jwtResponse = objectMapper.readValue(json, JwtResponseDto.class);
+        String token = jwtResponse.token();
+        assertAll(
+                () -> assertThat(jwtResponse.username()).isEqualTo("User"),
+                () -> assertThat(token).matches(Pattern.compile("^([A-Za-z0-9-_=]+\\.)+([A-Za-z0-9-_=])+\\.?$"))
+        );
+
 
 
         //step 7: user made GET /offers with header and system returned OK(200) with 0 offers

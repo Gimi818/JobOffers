@@ -91,7 +91,7 @@ class OfferFacadeTest {
         );
     }
 
-    @org.junit.Test
+    @Test
     public void should_throw_not_found_exception_when_offer_not_found() {
         // given
         OfferFacade offerFacade = new OfferFacadeTestConfiguration(List.of()).offerFacadeForTests();

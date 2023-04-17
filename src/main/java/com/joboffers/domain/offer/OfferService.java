@@ -1,6 +1,7 @@
 package com.joboffers.domain.offer;
 
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,6 +9,7 @@ import java.util.stream.Collectors;
 import static com.joboffers.domain.offer.OfferMapper.mapper;
 
 @AllArgsConstructor
+@Service
 public class OfferService {
 
     private final OfferFetchable flatOfferFetchable;

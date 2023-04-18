@@ -5,6 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 
+
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.ResultActions;
@@ -25,6 +27,7 @@ public class OfferDuplicateErrorIntegrationTest extends BaseIntegrationTests {
     }
 
     @Test
+    @WithMockUser
     @DisplayName("should return 409 conflict when added second offer with same offer url")
     public void should_return_409() throws Exception {
         // step 1

@@ -5,22 +5,21 @@ import com.joboffers.infrastructure.apivalidation.ApiValidationErrorDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.DynamicPropertyRegistry;
-import org.springframework.test.context.DynamicPropertySource;
+
+
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
-import org.testcontainers.containers.MongoDBContainer;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.utility.DockerImageName;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class ApiValidationIntegrationTests  extends BaseIntegrationTests {
+public class ApiValidationIntegrationTests extends BaseIntegrationTests {
 
 
     @Test
+    @WithMockUser
     @DisplayName("should return 400 bad request and validation message when empty and null in offer save request")
     public void should_return_400() throws Exception {
 

@@ -43,6 +43,7 @@ public class TypicalScenarioIntegrationTests extends BaseIntegrationTests implem
     @Container
     public static final MongoDBContainer mongoDBContainer = new MongoDBContainer(DockerImageName.parse("mongo:4.0.10"));
 
+
     @DynamicPropertySource
     public static void propertyOverride(DynamicPropertyRegistry registry) {
         registry.add("spring.data.mongodb.uri", mongoDBContainer::getReplicaSetUrl);
@@ -72,6 +73,7 @@ public class TypicalScenarioIntegrationTests extends BaseIntegrationTests implem
 
         //step 3: user tried to get JWT token by requesting POST /token with username=User, password=Password and system returned UNAUTHORIZED(401)
         //given && when
+
         ResultActions failedLoginRequest = mockMvc.perform(post("/token")
                 .content("""
                         {

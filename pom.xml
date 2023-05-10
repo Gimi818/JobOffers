@@ -18,7 +18,7 @@
         <maven.compiler.source>18</maven.compiler.source>
         <maven.compiler.target>18</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <testcontainers.version>1.17.4</testcontainers.version>
+        <testcontainers.version>1.17.6</testcontainers.version>
         <assertj-core.version>3.19.0</assertj-core.version>
         <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
         <org.projectlombok.version>1.18.20</org.projectlombok.version>
@@ -27,8 +27,8 @@
         <awaitility.version>4.0.3</awaitility.version>
         <springfox-boot-starter.version>3.0.0</springfox-boot-starter.version>
         <java-jwt.version>4.0.0</java-jwt.version>
-        <spring-data-redis.version>2.4.5</spring-data-redis.version>
-        <jedis.version>3.3.0</jedis.version>
+        <spring-data-redis.version>3.0.3</spring-data-redis.version>
+
 
     </properties>
     <dependencies>
@@ -48,6 +48,13 @@
             <version>${assertj-core.version}</version>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>3.8.0</version>
+        </dependency>
+
         <dependency>
             <groupId>com.github.tomakehurst</groupId>
             <artifactId>wiremock-jre8-standalone</artifactId>
@@ -62,9 +69,12 @@
         </dependency>
 
 
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-mongodb -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
+            <version>3.0.5</version>
         </dependency>
 
         <!--  TEST CONTAINERS -->
@@ -92,6 +102,7 @@
             <version>1.18.22</version>
             <scope>compile</scope>
         </dependency>
+
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-processor</artifactId>
@@ -149,6 +160,13 @@
             <artifactId>spring-data-redis</artifactId>
             <version>${spring-data-redis.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>3.12.11</version>
+        </dependency>
+
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
@@ -208,6 +226,21 @@
 
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.20</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 

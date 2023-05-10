@@ -41,7 +41,7 @@ public class TypicalScenarioIntegrationTests extends BaseIntegrationTests implem
     HttpScheduler httpScheduler;
 
     @Container
-    public static final MongoDBContainer mongoDBContainer = new MongoDBContainer(DockerImageName.parse("mongo:4.0.10"));
+    public static final MongoDBContainer mongoDBContainer = new MongoDBContainer(DockerImageName.parse("mongo:5.0.17"));
 
 
     @DynamicPropertySource

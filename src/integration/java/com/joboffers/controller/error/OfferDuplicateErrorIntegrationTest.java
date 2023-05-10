@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class OfferDuplicateErrorIntegrationTest extends BaseIntegrationTests {
     @Container
-    public static final MongoDBContainer mongoDBContainer = new MongoDBContainer(DockerImageName.parse("mongo:4.0.10"));
+    public static final MongoDBContainer mongoDBContainer = new MongoDBContainer(DockerImageName.parse("mongo:5.0.17"));
 
     @DynamicPropertySource
     public static void propertyOverride(DynamicPropertyRegistry registry) {

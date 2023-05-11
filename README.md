@@ -24,15 +24,43 @@ For a quick demonstration, the application has been deployed on an AWS server an
  Deployed on:
 <p align="left"> <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://i.pcmag.com/imagery/reviews/0179dSC1AqaTy8DbcTJMDYE-7.fit_scale.size_760x427.v1569472044.jpg" alt="java" width="80" height="40"/></a> </p>
 
-
-## Rest-API Endpoints
-Application provides five endpoints:
-
-|     ENDPOINT   | METHOD |         REQUEST          | RESPONSE |             FUNCTION             |
-|:--------------:|:------:|:------------------------:|:--------:|:--------------------------------:|
-|/register       |  POST  |   JSON BODY              |   JSON   | User registration                |
-|/token          |  POST  |   JSON BODY              |   JSON   | Get a token                      |
-|/offers         |  GET   |                          |   JSON   | Get all offers                   |
-|/offers         |  POST  |   JSON BODY              |   JSON   | Create a new offer               |
-|/offers/id      |  GET   |                          |   JSON   | Get offer by id                  |
-
+ ## How to use apllication in postman
+ 
+    Step 1 :
+    POST localhost:8080/register 
+    Enter your username and password. 
+  
+  <img src="https://github.com/Gimi818/JobOffers/blob/master/steps/1.PNG" width="500" heigt="700"/>
+ 
+    Step 2 :
+    POST localhost:8080/token
+    Enter username and password to get token.
+    
+  <img src="https://github.com/Gimi818/JobOffers/blob/master/steps/2.PNG" width="500" heigt="700"/>
+ 
+    Step 3.1 : 
+    Select the authorization field and select the Bearer token option 
+    and paste the token you received
+    
+  <img src="https://github.com/Gimi818/JobOffers/blob/master/steps/3.PNG" width="500" heigt="700"/>
+ 
+    Step 3.2 : 
+    GET localhost:8080/offers
+    Get all the current job offers 
+    and paste the token you received
+    
+  <img src="https://github.com/Gimi818/JobOffers/blob/master/steps/4.PNG" width="500" heigt="700"/>
+ 
+    Step 4 : 
+    GET localhost:8080/offers
+    Add a new job offer 
+    and paste the token you received
+    
+  <img src="https://github.com/Gimi818/JobOffers/blob/master/steps/5.PNG" width="500" heigt="700"/>
+ 
+    Step 5: 
+    GET localhost:8080/offers/{id}
+    Find a job offer by id
+    and paste the token you received
+    
+  <img src="https://github.com/Gimi818/JobOffers/blob/master/steps/6.PNG" width="500" heigt="700"/>

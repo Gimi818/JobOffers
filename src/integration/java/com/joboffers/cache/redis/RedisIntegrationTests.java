@@ -58,7 +58,7 @@ public class RedisIntegrationTests extends BaseIntegrationTests {
                         {
                         "username": "User",
                         "password": "Password"
-                        }
+                        }                                                                                                                                                                                  
                         """.trim())
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
         );

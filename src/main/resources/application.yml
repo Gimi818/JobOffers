@@ -33,6 +33,7 @@ http:
 scheduling:
   enabled: true
 
+
 auth:
   jwt:
     expirationDays: 30

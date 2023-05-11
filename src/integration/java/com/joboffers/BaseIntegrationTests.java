@@ -34,7 +34,7 @@ public class BaseIntegrationTests {
     @Autowired
     public MockMvc mockMvc;
     @Container
-    public static final MongoDBContainer mongoDBContainer = new MongoDBContainer(DockerImageName.parse("mongo:4.0.10"));
+    public static final MongoDBContainer mongoDBContainer = new MongoDBContainer(DockerImageName.parse("mongo:5.0.17"));
 
     @RegisterExtension
     public static WireMockExtension wireMockServer = WireMockExtension.newInstance()

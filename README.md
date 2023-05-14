@@ -1,6 +1,6 @@
 # JobOffers 
 ## Web application to help find first job
--A  application that gives the opportunity to search offert jobs for junior developers.
+A  application that gives the opportunity to search offert jobs for junior developers.
 The main function of the application is to retrieve data from a remote server and save to a database with a job search function.
 This project uses modular monolithic application architecture with elements of hexagonal.
 I used a nosql database because mongodb works best for fast writing and reading of simple data.
@@ -8,9 +8,8 @@ The user first needs to register and will receive an authorisation token. The Jw
 The user can get all job offers, search for offers by id and add a new job offer to the database.
 Endpoint GET is cacheabled using Redis to improve the speed of requests.
 The application is connected to a remote server from which it getting job offers a request to the remote server 
-is made every 30 minutes using a spring scheduler to always have new and up-to-date job offers.
+is made every 1 hour using a spring scheduler to always have new and current job offers.
 
-For a quick demonstration, the application has been deployed on an AWS server and is available at the link : 
 
 ## Application is developed using following technologies:
  Core:
@@ -21,18 +20,52 @@ For a quick demonstration, the application has been deployed on an AWS server an
 <p align="left"> <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://junit.org/junit4/images/junit5-banner.png" alt="java" width="80" height="40"/>
 <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://d33wubrfki0l68.cloudfront.net/6b06015a22f71ab9571943df763c6e827ae18f89/a3195/logo.png" alt="java" width="80" height="40"/>
 <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://javadoc.io/static/org.mockito/mockito-core/1.9.5/org/mockito/logo.jpg" alt="java" width="80" height="40"/></a> </p>
- Deployed on:
-<p align="left"> <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://i.pcmag.com/imagery/reviews/0179dSC1AqaTy8DbcTJMDYE-7.fit_scale.size_760x427.v1569472044.jpg" alt="java" width="80" height="40"/></a> </p>
+ 
+ ## To run the application, follow these steps:
+- Install mongodb and docker on your computer. 
+- Clone the repository in Intellij IDEA using the link https://github.com/Gimi818/JobOffers.git
+- Enter "docker-compose up" in thermilan.
+- Run the applications in Intellij IDEA.
+- Check the available endpoints at the link localhost:8080/swagger-ui/index.html#/
+- Try the apllications in Postaman , the steps how to do it are below.
 
-
-## Rest-API Endpoints
-Application provides five endpoints:
-
-|     ENDPOINT   | METHOD |         REQUEST          | RESPONSE |             FUNCTION             |
-|:--------------:|:------:|:------------------------:|:--------:|:--------------------------------:|
-|/register       |  POST  |   JSON BODY              |   JSON   | User registration                |
-|/token          |  POST  |   JSON BODY              |   JSON   | Get a token                      |
-|/offers         |  GET   |                          |   JSON   | Get all offers                   |
-|/offers         |  POST  |   JSON BODY              |   JSON   | Create a new offer               |
-|/offers/id      |  GET   |                          |   JSON   | Get offer by id                  |
-
+ ## How to use apllication in postman:
+ 
+    Step 1 :
+    POST localhost:8080/register 
+    Enter your username and password. 
+  
+  <img src="https://github.com/Gimi818/JobOffers/blob/master/steps/1.PNG" width="500" heigt="700"/>
+ 
+    Step 2 :
+    POST localhost:8080/token
+    Enter username and password to get token.
+    
+  <img src="https://github.com/Gimi818/JobOffers/blob/master/steps/2.PNG" width="500" heigt="700"/>
+ 
+    Step 3.1 : 
+    Select the authorization field and select the Bearer token option 
+    and paste the token you received
+    
+  <img src="https://github.com/Gimi818/JobOffers/blob/master/steps/3.PNG" width="500" heigt="700"/>
+ 
+    Step 3.2 : 
+    GET localhost:8080/offers
+    Get all the current job offers 
+    and paste the token you received
+    
+  <img src="https://github.com/Gimi818/JobOffers/blob/master/steps/4.PNG" width="500" heigt="700"/>
+ 
+    Step 4 : 
+    GET localhost:8080/offers
+    Add a new job offer 
+    and paste the token you received
+    
+  <img src="https://github.com/Gimi818/JobOffers/blob/master/steps/5.PNG" width="500" heigt="700"/>
+ 
+    Step 5: 
+    GET localhost:8080/offers/{id}
+    Find a job offer by id
+    and paste the token you received
+    
+  <img src="https://github.com/Gimi818/JobOffers/blob/master/steps/6.PNG" width="500" heigt="700"/>

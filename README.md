@@ -8,9 +8,8 @@ The user first needs to register and will receive an authorisation token. The Jw
 The user can get all job offers, search for offers by id and add a new job offer to the database.
 Endpoint GET is cacheabled using Redis to improve the speed of requests.
 The application is connected to a remote server from which it getting job offers a request to the remote server 
-is made every 30 minutes using a spring scheduler to always have new and up-to-date job offers.
+is made every 30 minutes using a spring scheduler to always have new and current job offers.
 
-For a quick demonstration, the application has been deployed on an AWS server and is available at the link : 
 
 ## Application is developed using following technologies:
  Core:
@@ -21,10 +20,16 @@ For a quick demonstration, the application has been deployed on an AWS server an
 <p align="left"> <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://junit.org/junit4/images/junit5-banner.png" alt="java" width="80" height="40"/>
 <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://d33wubrfki0l68.cloudfront.net/6b06015a22f71ab9571943df763c6e827ae18f89/a3195/logo.png" alt="java" width="80" height="40"/>
 <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://javadoc.io/static/org.mockito/mockito-core/1.9.5/org/mockito/logo.jpg" alt="java" width="80" height="40"/></a> </p>
- Deployed on:
-<p align="left"> <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://i.pcmag.com/imagery/reviews/0179dSC1AqaTy8DbcTJMDYE-7.fit_scale.size_760x427.v1569472044.jpg" alt="java" width="80" height="40"/></a> </p>
+ 
+ ## To run the application, follow these steps:
+- Install mongodb and docker on your computer. 
+- Clone the repository in Intellij IDEA using the link https://github.com/Gimi818/JobOffers.git
+- Enter "docker-compose up" in thermilan.
+- Run the applications in Intellij IDEA.
+- Check the available endpoints at the link localhost:8080/swagger-ui/index.html#/
+- Try the apllications in Postaman , the steps how to do it are below.
 
- ## How to use apllication in postman
+ ## How to use apllication in postman:
  
     Step 1 :
     POST localhost:8080/register 

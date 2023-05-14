@@ -173,6 +173,7 @@
 
     </dependencies>
     <build>
+        <finalName>offers</finalName>
 
         <plugins>
             <plugin>

@@ -123,7 +123,7 @@ public class TypicalScenarioIntegrationTests extends BaseIntegrationTests implem
                 () -> assertThat(registrationDto.id()).isNotNull()
         );
 
-        //step 6: user tried to get JWT token by requesting POST /token with username=someUser, password=somePassword and system returned OK(200) and jwttoken=AAAA.BBBB.CCC
+        //step 6: user tried to get JWT token by requesting POST /token with username=User, password=Password and system returned OK(200)
         ResultActions successLoginRequest = mockMvc.perform(post("/token")
                 .content(
                         """
@@ -159,7 +159,7 @@ public class TypicalScenarioIntegrationTests extends BaseIntegrationTests implem
         });
         assertThat(listOffers).isEmpty();
 
-        //step 8 one new offer in external HTTp server
+        //step 8 one new offer in external HTTP server
 
         wireMockServer.stubFor(WireMock.get("/offers")
                 .willReturn(WireMock.aResponse()

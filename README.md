@@ -1,6 +1,6 @@
 # JobOffers 
 ## Web application to help find first job
--A  application that gives the opportunity to search offert jobs for junior developers.
+A  application that gives the opportunity to search offert jobs for junior developers.
 The main function of the application is to retrieve data from a remote server and save to a database with a job search function.
 This project uses modular monolithic application architecture with elements of hexagonal.
 I used a nosql database because mongodb works best for fast writing and reading of simple data.
@@ -8,7 +8,7 @@ The user first needs to register and will receive an authorisation token. The Jw
 The user can get all job offers, search for offers by id and add a new job offer to the database.
 Endpoint GET is cacheabled using Redis to improve the speed of requests.
 The application is connected to a remote server from which it getting job offers a request to the remote server 
-is made every 30 minutes using a spring scheduler to always have new and current job offers.
+is made every 1 hour using a spring scheduler to always have new and current job offers.
 
 
 ## Application is developed using following technologies:

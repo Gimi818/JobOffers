@@ -1,7 +1,7 @@
 # JobOffers 
 ## Web application to help find first job
 A  application that gives the opportunity to search offert jobs for junior developers.
-The main function of the application is to retrieve data from a remote server and save to a database with a job search function.
+The main function of the application is to retrieve data from a remote server and save to with a function to search and add jobs.
 This project uses modular monolithic application architecture with elements of hexagonal.
 I used a nosql database because mongodb works best for fast writing and reading of simple data.
 The user first needs to register and will receive an authorisation token. The Jwt token will enable the user to use the functionalities of the application.

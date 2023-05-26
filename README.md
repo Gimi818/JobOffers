@@ -21,6 +21,8 @@ is made every 1 hour using a spring scheduler to always have new and current job
 <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://d33wubrfki0l68.cloudfront.net/6b06015a22f71ab9571943df763c6e827ae18f89/a3195/logo.png" alt="java" width="80" height="40"/>
 <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://javadoc.io/static/org.mockito/mockito-core/1.9.5/org/mockito/logo.jpg" alt="java" width="80" height="40"/></a> </p>
  
+ 
+ 
  ## To run the application, follow these steps:
 - Install mongodb and docker on your computer. 
 - Clone the repository in Intellij IDEA using the link https://github.com/Gimi818/JobOffers.git
@@ -69,3 +71,9 @@ is made every 1 hour using a spring scheduler to always have new and current job
     and paste the token you received
     
   <img src="https://github.com/Gimi818/JobOffers/blob/master/steps/6.PNG" width="500" heigt="700"/>
+ 
+ ## Tests:
+ <img src="https://github.com/Gimi818/JobOffers/blob/master/steps/tests1.1.PNG" width="500" heigt="700"/>
+ <img src="https://github.com/Gimi818/JobOffers/blob/master/steps/tests2.PNG" width="500" heigt="700"/>
+ 
+ 

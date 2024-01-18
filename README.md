@@ -14,7 +14,7 @@ Endpoint GET is cacheable using Redis to improve the speed of requests.
 The application is connected to a remote server from which it gets job offers a request to the remote server 
 is made every hour using a spring scheduler to always have new and current job offers.
 
-The application is tested using unit and integration tests.
+The application is tested using unit tests.
 
 
 ## Application is developed using the following technologies:
